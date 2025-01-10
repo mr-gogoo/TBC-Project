@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}<br>
+
+{% if current_user.role == "Admin" %}
+<a href="/create_item" type="button" class="btn btn-outline-primary">გმირის დამატება</a>
+
+{% endif %}
+<br><br>
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for item in items %}
+    <div>
+
+        <div class="col">
+            <div class="card" style="width: 26rem;">
+                <img src="{{item['img']}}"
+                     class="card-img-top"
+                     alt="">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{item['name']}}</h5>
+                    <p class="card-text">{{item['text']}}</p>
+                    <a href="" class="btn btn-primary">დეტალური ინფორმაცია</a>
+                    {% if current_user.role == "Admin" %}
+                    <a href="/edit_item/{{item.id}}" class="btn btn-successs">Edit</a>
+                    <a href="/delete_item/{{item.id}}" class="btn btn-danger">Delete</a>
+                    {% endif %}
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+
+</div>
+{% endblock %}

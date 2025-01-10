@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}<br>
+
+{% if current_user.role == "Admin" %}
+<a href="/create_pro" type="button" class="btn btn-outline-primary">პროგრამის დამატება</a>
+{% endif %}
+<br><br>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for pro in pros %}
+    <div>
+
+        <div class="col">
+            <div class="card" style="width: 26rem;">
+                <img src="{{pro['img']}}"
+                     class="card-img-top"
+                     alt="">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{pro['name']}}</h5>
+                    <p class="card-text">{{pro['text']}}</p>
+                    <a href="" class="btn btn-primary">დეტალური ინფორმაცია</a>
+                    {% if current_user.role == "Admin" %}
+                    <a href="/edit_pro/{{pro.id}}" class="btn btn-successs">Edit</a>
+                    <a href="/delete_pro/{{pro.id}}" class="btn btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+
