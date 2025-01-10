@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}<br>
+{% if current_user.role == "Admin" %}
+<a href="/create_product" type="button" class="btn btn-outline-primary">ანიმატორის დამატება</a>
+{% endif %}
+<br><br>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    {% for product in products %}
+
+    <div>
+
+        <div class="col">
+            <div class="card" style="width: 26rem;">
+                <img src="{{product['img']}}"
+                     class="card-img-top"
+                     alt="">
+
+                <div class="card-body">
+                    <h5 class="card-title">{{product['name']}}</h5>
+                    <p class="card-text">{{product['text']}}</p>
+                    <a href="" class="btn btn-primary">დეტალური ინფორმაცია</a>
+                    {% if current_user.role == "Admin" %}
+                    <a href="/edit_product/{{product.id}}" class="btn btn-success">Edit</a>
+                    <a href="/delete_product/{{product.id}}" class="btn btn-danger">Delete</a>
+                    {% endif %}
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+</div>
+{% endblock %}
